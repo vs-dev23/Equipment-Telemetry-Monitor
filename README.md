@@ -1,6 +1,6 @@
 # Bench Check — Lab Equipment Monitor
 
-I built Bench Check as a small project to explore how equipment readings can move through a web app. It can record temperature and vibration values, save them in a database, and review the latest readings on a dashboard. When a machine’s latest reading crosses a set limit, the app highlights it so it’s easy to spot.
+Bench Check — Lab Equipment Monitor is a small project to explore how equipment readings can move through a web app. It can record temperature and vibration values, save them in a database, and review the latest readings on a dashboard. When a machine’s latest reading crosses a set limit, the app highlights it so it’s easy to spot.
 
 The project brings together a Python backend, a browser-based dashboard, and a local database. I kept the alert rules simple and explainable so it’s clear why a reading is flagged.
 
