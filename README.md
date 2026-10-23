@@ -1,10 +1,10 @@
 # Bench Check — Lab Equipment Monitor
 
-I built Bench Check as a small CSE project to explore how equipment readings can move through a web app. You can record temperature and vibration values, save them in a database, and review the latest readings on a dashboard. When a machine’s latest reading crosses a set limit, the app highlights it so it’s easy to spot.
+I built Bench Check as a small project to explore how equipment readings can move through a web app. It can record temperature and vibration values, save them in a database, and review the latest readings on a dashboard. When a machine’s latest reading crosses a set limit, the app highlights it so it’s easy to spot.
 
 The project brings together a Python backend, a browser-based dashboard, and a local database. I kept the alert rules simple and explainable so it’s clear why a reading is flagged.
 
-## What you can do
+## What it can do:
 
 - View recent temperature readings and each machine’s latest status.
 - Add a reading from the dashboard.
@@ -12,7 +12,7 @@ The project brings together a Python backend, a browser-based dashboard, and a l
 - Compare averages, peak values, and alert counts on the analytics page.
 - Explore the API and check the database connection in API Lab.
 
-## What I used
+## Technologies used:
 
 - **Python and FastAPI** for the backend and REST API.
 - **SQLite and SQL** to store and summarize readings.
@@ -23,11 +23,11 @@ The project brings together a Python backend, a browser-based dashboard, and a l
 
 Open Command Prompt or PowerShell in the project folder, then run:
 
-```powershell
+powershell
 py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m uvicorn main:app --reload
-```
+
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. The app creates `telemetry.db` beside `main.py` when it starts. Use **Load sample** to explore the dashboard, or choose **Add reading** to enter your own values.
 
@@ -55,11 +55,11 @@ The interactive API documentation is available at [http://127.0.0.1:8000/docs](h
 
 Example body for `POST /api/readings`:
 
-```json
+json
 {
   "machine_id": "LAB-MOTOR-01",
   "temperature": 68.5,
   "vibration": 2.4,
   "runtime_hours": 245.0
 }
-```
+
