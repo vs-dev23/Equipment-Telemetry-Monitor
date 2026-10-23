@@ -1,50 +1,53 @@
 # Bench Check: Lab Equipment Monitor
 
+A CSE portfolio project for logging temperature and vibration readings from lab equipment. Bench Check stores measurements in SQLite, shows the latest condition for each equipment ID, and highlights readings that cross configurable example limits.
+
 ## Project focus
 
-A CSE portfolio prototype for tracking temperature and vibration readings from small lab equipment. The app stores measurements, shows the latest condition for each equipment ID, and flags readings over clear limits.
+The alerts use clear, rule-based thresholds. The project has no labelled equipment failure data, so it does not claim to predict failures with machine learning. This keeps each warning easy to explain and verify.
 
-I kept the alert logic rule-based because this project does not have labelled failure examples. That makes each alert easy to explain and avoids presenting a threshold check as machine-learning prediction.
+## Skills demonstrated
 
-## What it demonstrates
-
-- **Python and FastAPI:** REST endpoints, input validation, and an interactive API reference.
-- **SQL and SQLite:** persistent readings, full-history counts, grouped queries, and per-equipment summaries.
-- **Data analysis:** averages, peaks, alert counts, and alert rate.
-- **Frontend integration:** a form that posts readings, live dashboard updates, filters, and CSV export.
+- **Python and FastAPI:** REST endpoints, request validation, and interactive API documentation.
+- **SQL and SQLite:** persistent storage, grouped queries, and per-equipment summaries.
+- **Data analysis:** averages, peak values, alert counts, and alert rates.
+- **Frontend integration:** dashboard updates, data entry, search and status filters, and CSV export.
 
 ## Run on Windows
 
-Open PowerShell and run:
+Open Command Prompt or PowerShell in the project folder and run these commands one at a time:
 
 ```powershell
-cd Equipment-Telemetry-Monitor
 py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m uvicorn main:app --reload
+\.venv\Scripts\python.exe -m pip install -r requirements.txt
+\.venv\Scripts\python.exe -m uvicorn main:app --reload
 ```
 
-Open http://127.0.0.1:8000. Use **Load sample** to generate synthetic readings or **Add reading** to enter one yourself. The app creates `telemetry.db` beside `main.py`. API docs are at http://127.0.0.1:8000/docs.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). The app creates `telemetry.db` beside `main.py` the first time it runs.
 
-## Pages
+Use **Load sample** to add synthetic readings, or **Add reading** to enter a measurement. The interactive API documentation is at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-- **Overview:** total readings, alert count, temperature trend, and equipment pulse.
-- **Equipment:** latest values for each ID; add a reading from this page.
-- **Telemetry Log:** filter by equipment or condition and export matching rows to CSV.
-- **Analytics:** SQL averages, peaks, and alert rates grouped by equipment.
-- **API Lab:** endpoint guide, database health check, request example, and FastAPI docs link.
+## Dashboard pages
+
+- **Overview:** reading totals, current alerts, temperature trend, and latest equipment readings.
+- **Equipment:** latest status by equipment ID and a shortcut to add readings.
+- **Telemetry Log:** filter readings by equipment or alert status and export the results to CSV.
+- **Analytics:** averages, peaks, and alert rates overall and by equipment.
+- **API Lab:** endpoint guide, database health check, and an example sensor request.
 
 ## API routes
 
-- `GET /api/summary` - full-history counts, latest readings, and flagged reading count.
-- `GET /api/readings?limit=100` - recent readings (up to 500).
-- `GET /api/analytics` - overall and per-equipment SQL aggregates.
-- `GET /api/health` - check API-to-database connectivity.
-- `POST /api/readings` - validate and save a reading.
-- `POST /api/demo-data?count=120` - add synthetic sample readings.
-- `DELETE /api/readings` - clear the local demo database.
+| Method | Route | Purpose |
+| --- | --- | --- |
+| `GET` | `/api/summary` | Reading totals, latest readings, and flagged-reading count. |
+| `GET` | `/api/readings?limit=100` | Recent stored measurements; limit can be up to 500. |
+| `GET` | `/api/analytics` | Overall and per-equipment SQL aggregates. |
+| `GET` | `/api/health` | Check API and database connectivity. |
+| `POST` | `/api/readings` | Validate and save a sensor reading. |
+| `POST` | `/api/demo-data?count=120` | Add synthetic readings for a demonstration. |
+| `DELETE` | `/api/readings` | Clear the local demo database. |
 
-Example POST body:
+Example request body for `POST /api/readings`:
 
 ```json
 {
@@ -55,7 +58,6 @@ Example POST body:
 }
 ```
 
-## Limits and next step
+## Limits and next steps
 
-Sample data is synthetic; no physical sensor is connected by default. To use a device, have it send JSON to `POST /api/readings`. Current alert limits are 80°C and 7 mm/s. The red warning banner appears when an asset latest reading crosses either limit and links to the filtered log. These are example settings and should be adjusted for the equipment being monitored.
-
+Sample readings are synthetic; no physical sensor is connected by default. A device or client can send JSON to `POST /api/readings`. The example alert limits are **80°C** and **7 mm/s** vibration. The app highlights an alert when an equipment item's latest reading crosses either limit. Adjust these example thresholds for the equipment being monitored.
