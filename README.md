@@ -58,6 +58,3 @@ Example request body for `POST /api/readings`:
 }
 ```
 
-## Limits and next steps
-
-Sample readings are synthetic; no physical sensor is connected by default. A device or client can send JSON to `POST /api/readings`. The example alert limits are **80°C** and **7 mm/s** vibration. The app highlights an alert when an equipment item's latest reading crosses either limit. Adjust these example thresholds for the equipment being monitored.
